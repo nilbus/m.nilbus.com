@@ -1,0 +1,19 @@
+<html><head><script>
+var path = window.location.pathname;
+var redirectPatterns = {
+    "^/me$": "https://www.google.com/maps/search/105 Jasmine Rose Ct, Holly Springs, NC",
+    "^/me/(.*)": "https://www.google.com/maps/search/$1/@35.7258073,-78.8254352",
+    "^/to/(.*)": "https://www.google.com/maps/dir/105+Jasmine+Rose+Court,+Holly+Springs,+NC+27540,+USA/$1",
+    "^/(.*)": "https://www.google.com/maps/search/$1"
+};
+for (var pattern in redirectPatterns) {
+  var match;
+  if (match = path.match(pattern)) {
+    var destinationTemplate = redirectPatterns[pattern];
+    var query = match[1];
+    var destination = destinationTemplate.replace("$1", query);
+    window.location = destination;
+    break;
+  }
+}
+</script></head></html>
